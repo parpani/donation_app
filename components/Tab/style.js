@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {horizontalScale,scaleFontSize,verticalScale} from '../../assets/styles/scaling';
+import { getFontFamily } from '../../assets/fonts/helper';
 
 const style = StyleSheet.create({
   tab: {
@@ -12,9 +13,9 @@ const style = StyleSheet.create({
     backgroundColor: '#F3F5F9',
   },
   title: {
-    fontFamily: 'Inter',
+    fontFamily: getFontFamily('Inter_18pt', '500'),
     fontSize: scaleFontSize(14),
-    fontWeight: '500',
+    //fontWeight: '500',
     lineHeight: scaleFontSize(17),
     color: '#FFFFFF',
     textAlign: 'center',

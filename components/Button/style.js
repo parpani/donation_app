@@ -1,9 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {
-  horizontalScale,
-  scaleFontSize,
-  verticalScale,
-} from '../../assets/styles/scaling';
+import {horizontalScale, scaleFontSize, verticalScale} from '../../assets/styles/scaling';
+import { getFontFamily } from '../../assets/fonts/helper';
 
 const style = StyleSheet.create({
   button: {
@@ -16,9 +13,9 @@ const style = StyleSheet.create({
     opacity: 0.5,
   },
   title: {
-    fontFamily: 'Inter',
+    fontFamily: getFontFamily('Inter_18pt', '500'),
     fontSize: scaleFontSize(16),
-    fontWeight: '500',
+    //fontWeight: '500',
     lineHeight: scaleFontSize(19),
     color: '#FFFFFF',
     textAlign: 'center',
