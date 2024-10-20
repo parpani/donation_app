@@ -31,6 +31,7 @@ const Search = props => {
         ref={textInputRef}
         style={style.searchInput}
         value={search}
+        placeholder={props.placeholder}
         onChangeText={value => handleSearch(value)}
       />
     </Pressable>
@@ -39,10 +40,12 @@ const Search = props => {
 
 Search.defaultProps = {
   onSearch: () => {},
+  placeholder: 'Search'
 };
 
 Search.propTypes = {
   onPress: PropTypes.func,
+  placeholder:PropTypes.string,
 };
 
 export default Search;
