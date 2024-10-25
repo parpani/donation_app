@@ -1,15 +1,15 @@
 import React from 'react';
-import {Pressable, Text} from 'react-native';
+import {Pressable, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import style from './style';
 const Button = props => {
   return (
-    <Pressable
+    <TouchableOpacity
       disabled={props.isDisabled}
       style={[style.button, props.isDisabled && style.disabled]}
       onPress={() => props.onPress()}>
       <Text style={style.title}>{props.title}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
