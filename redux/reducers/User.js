@@ -8,9 +8,10 @@ import {createSlice} from '@reduxjs/toolkit';
 
 // Defining the initial state for the user slice of the store
 const initialState = {
-  userId: 1,
-  firstName: 'Meet',
-  lastName: 'Parpani',
+  // userId: 1,
+  // firstName: 'Meet',
+  // lastName: 'Parpani',
+  isLoggedIn: false,
   profileImage:'https://cdn.dribbble.com/users/1577045/screenshots/4914645/media/028d394ffb00cb7a4b2ef9915a384fd9.png?compress=1&resize=400x300&vertical=top',
 };
 
@@ -25,16 +26,22 @@ export const User = createSlice({
     resetToInitialState: () => {  //this reducer needs to be set up everytime as if u want to make aqny changes in the store after it is created, this function will help you to do so, otherwise only the old values will be fetched.
       return initialState;
     },
-    updateFirstName: (state, action) => {
-      state.firstName = action.payload.firstName;
+    logIn: (state, action) => {
+      return {...state, ...{isLoggedIn:true}, ...action.payload};
     },
-    updateLastName: (state, action) => {
-      state.lastName = action.payload.lastName;
+    updateToken: (state, action) => {   //to update the token generated from the firebase
+      state.token = action.payload;
     },
+    // updateFirstName: (state, action) => {
+    //   state.firstName = action.payload.firstName;
+    // },
+    // updateLastName: (state, action) => {
+    //   state.lastName = action.payload.lastName;
+    // },
   }
 });
 
 // Exporting the reducers here from the "User" slice
 // makes them available to other parts of the app that want to use it
-export const {resetToInitialState, updateFirstName, updateLastName} = User.actions;
+export const {logIn, resetToInitialState, updateToken} = User.actions;
 export default User.reducer;

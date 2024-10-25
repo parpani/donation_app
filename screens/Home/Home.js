@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import {SafeAreaView,ScrollView,View, Pressable, Text, Image, StyleSheet, FlatList} from 'react-native';
+import {SafeAreaView,ScrollView,View, Pressable, Text, Image, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import { Routes } from '../../navigation/Routes';
 
 //import style from './style';
@@ -16,9 +16,11 @@ import Tab from '../../components/Tab/Tab';
 // The useSelector hook allows us to select and retrieve data from the store
 // The useDispatch hook allows us to dispatch actions to update the store
 import { useDispatch, useSelector} from 'react-redux';
-import { updateFirstName, updateLastName, resetToInitialState } from '../../redux/reducers/User';
+//import { updateFirstName, updateLastName, resetToInitialState } from '../../redux/reducers/User';
 import { updateSelectedCategoryId } from '../../redux/reducers/Categories';
 import { updateSelectedDonationId } from '../../redux/reducers/Donations';
+import {resetToInitialState} from '../../redux/reducers/User';
+import {logOut} from '../../api/user';
 
 const Home = ({navigation}) => {
   
@@ -35,6 +37,8 @@ const Home = ({navigation}) => {
   //console.log(categories);
   const donations = useSelector(state => state.donations);
   //console.log(donations);
+
+  //console.log("In Home",user);
  
 //For Categories  
   //Making a pagination function for lazy loading. no need to load all the data from the start
@@ -81,14 +85,24 @@ const Home = ({navigation}) => {
           <View>
             <Text style={style.headerIntroText}>Hello, </Text>
             <View style={style.username}>
-              <Header title={user.firstName + ' ' + user.lastName[0] + '. 👋'} />
+              {/* <Header title={user.firstName + ' ' + user.lastName[0] + '. 👋'} /> */}
+              <Header title={user.displayName + ' 👋'} />
             </View>
           </View>
-          <Image
-            source={{uri: user.profileImage}}
-            style={style.profileImage}
-            resizeMode={'contain'}
-          />
+          <View>
+            <Image
+              source={{uri: user.profileImage}}
+              style={style.profileImage}
+              resizeMode={'contain'}
+            />
+            <TouchableOpacity
+              onPress={async () => {
+                dispatch(resetToInitialState());
+                await logOut();
+              }}>
+              <Header type={3} title={'Logout'} color={'#156CF7'} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={style.searchBox}>
